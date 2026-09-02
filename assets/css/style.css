@@ -792,9 +792,13 @@ body:has(.header.is-hidden) .menu-nav { transform: translateY(calc(var(--hh) * -
 [data-anim="mask"] > img {
   clip-path: inset(0 0 100% 0);
   transform: scale(1.06);
-  transition: clip-path 1.3s var(--ease), transform 1.6s var(--ease);
+  transition: clip-path 1.3s var(--ease), transform 1.6s var(--ease), opacity 0.7s linear;
 }
 [data-anim="mask"].is-in > img { clip-path: inset(0 0 0 0); transform: scale(1); }
+/* La clase .img-fade la pone el JS: sin JS las fotos se ven sin fundido en
+   vez de quedarse invisibles. */
+.img-fade [data-anim="mask"] > img { opacity: 0; }
+.img-fade [data-anim="mask"] > img.is-loaded { opacity: 1; }
 [data-anim-delay="1"] { transition-delay: 0.1s; }
 [data-anim-delay="2"] { transition-delay: 0.2s; }
 [data-anim-delay="3"] { transition-delay: 0.3s; }

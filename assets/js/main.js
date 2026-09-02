@@ -100,35 +100,27 @@
 
   /* ---------- Reveal de bloques ---------- */
 
-  /* La cortinilla de [data-anim="mask"] no debe abrirse sobre un hueco vacío:
-     si la foto todavía no ha llegado, se espera a tenerla decodificada. Sin
-     esto la animación se consumía en blanco y la imagen aparecía de golpe al
-     final, que es justo lo que se veía en la última sección de la home. */
-  const revealWhenReady = (el) => {
-    const img = el.getAttribute('data-anim') === 'mask' ? el.querySelector('img') : null;
-    if (!img || img.complete) {
-      el.classList.add('is-in');
+  /* Las fotos de cortinilla entran con un fundido en cuanto terminan de
+     cargar. Así una foto que llega tarde no aparece de golpe, y —esto es lo
+     importante— la cortinilla ya no tiene que esperar a la descarga completa:
+     esa espera era justo lo que hacía que parecieran lentas.
+     La clase va en <html> para que sin JS las imágenes se vean igualmente. */
+  document.documentElement.classList.add('img-fade');
+  document.querySelectorAll('[data-anim="mask"] > img').forEach((img) => {
+    if (img.complete) {
+      img.classList.add('is-loaded');
       return;
     }
-    let done = false;
-    const go = () => {
-      if (done) return;
-      done = true;
-      el.classList.add('is-in');
-    };
-    // Tope de seguridad: si la imagen falla o tarda demasiado, se revela igual.
-    const guard = setTimeout(go, 3000);
-    const ready = () => { clearTimeout(guard); go(); };
-    if (img.decode) img.decode().then(ready, ready);
-    else img.addEventListener('load', ready, { once: true });
-    img.addEventListener('error', ready, { once: true });
-  };
+    const done = () => img.classList.add('is-loaded');
+    img.addEventListener('load', done, { once: true });
+    img.addEventListener('error', done, { once: true });
+  });
 
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          revealWhenReady(entry.target);
+          entry.target.classList.add('is-in');
           io.unobserve(entry.target);
         }
       });
