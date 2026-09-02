@@ -125,7 +125,12 @@
         }
       });
     },
-    { rootMargin: '0px 0px -12% 0px', threshold: 0.08 }
+    /* El margen negativo de antes (-12%) obligaba a meter el bloque bien
+       dentro de la pantalla antes de disparar; sumado a que la cortinilla
+       dura más de un segundo, había que scrollear de más para ver la foto.
+       Ahora salta justo antes de entrar, y para cuando la miras ya ha
+       terminado. */
+    { rootMargin: '0px 0px 8% 0px', threshold: 0 }
   );
   document.querySelectorAll('[data-anim]').forEach((el) => io.observe(el));
 
