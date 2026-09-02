@@ -113,9 +113,21 @@ La versión móvil no es la de escritorio encogida; el bloque `MÓVIL` al final 
 Cada página lleva `canonical`, Open Graph y Twitter Card, con `assets/img/og.jpg`
 (1200x630) como imagen de previsualización.
 
-⚠️ Las URL absolutas de esas etiquetas están escritas contra **`https://theveganroll.com`**.
-Si el dominio final es otro, hay que buscar y reemplazar esa cadena en los 7 HTML:
-sin URL absoluta y correcta, WhatsApp, Instagram y Facebook no muestran la tarjeta.
+⚠️ Las URL absolutas de esas etiquetas están escritas contra **`https://theveganroll.com`**,
+que **todavía apunta a la web antigua**. Mientras el sitio viva en una URL de Vercel hay que
+cambiarlas, o al compartir el enlace la tarjeta buscará la imagen en el dominio viejo y saldrá
+rota. Los rastreadores de WhatsApp, Instagram y Facebook no ejecutan JavaScript, así que esto
+no se puede resolver en tiempo de ejecución: tiene que estar en el HTML.
+
+Para cambiarlo de golpe en los 7 HTML:
+
+```bash
+ANTIGUO="https://theveganroll.com"
+NUEVO="https://tu-proyecto.vercel.app"
+sed -i '' "s|$ANTIGUO|$NUEVO|g" *.html
+```
+
+Afecta a `canonical`, `og:url`, `og:image` y `twitter:image`.
 
 ## Wordmark
 
@@ -152,7 +164,7 @@ cuñas se escapaban del bloque y estrujaban la sección siguiente.
 - Horarios: comidas J–D 13:00–16:00 · cenas toda la semana 19:30–23:00 (de la web antigua).
 - Teléfonos: 685 607 037 / 825 853 761. WhatsApp: `https://wa.me/34685607037`.
 - Carta y precios: copiados de theveganroll.com/restaurant (revisar antes de publicar).
-- `hola@theveganroll.com` es un email de ejemplo: sustituir por el real.
+- Email de contacto: **theveganroll@gmail.com**.
 - El enlace de Glovo apunta a glovoapp.com: sustituir por la URL del restaurante.
 
 ## Formulario de reserva
