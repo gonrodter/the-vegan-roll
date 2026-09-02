@@ -592,7 +592,14 @@ body.nav-open .nav__item a { transform: translateY(0); opacity: 1; }
 
 .menu-nav {
   position: sticky;
-  top: clamp(52px, 6.4vh, 74px);
+  /* --hh es el alto real de la cabecera, medido por JS. Antes había aquí un
+     clamp a ojo (máx. 74px) que en escritorio se quedaba corto y dejaba el
+     índice por debajo de la cabecera. */
+  top: var(--hh);
+  /* El desplazamiento va por transform, no por `top`: animar el offset de un
+     sticky deja el valor congelado a mitad de camino en Chrome (y además
+     provoca layout en cada frame). */
+  transition: transform 0.55s var(--ease);
   z-index: 300;
   background: var(--paper);
   border-block: 1px solid rgba(17, 19, 15, 0.16);
@@ -612,10 +619,13 @@ body.nav-open .nav__item a { transform: translateY(0); opacity: 1; }
   white-space: nowrap;
 }
 .menu-nav ul::-webkit-scrollbar { display: none; }
+/* Cuando la cabecera se esconde al bajar, el índice sube con ella: si no,
+   queda una franja de papel con contenido asomando por detrás. */
+body:has(.header.is-hidden) .menu-nav { transform: translateY(calc(var(--hh) * -1)); }
 .menu-nav a { padding-block: 4px; border-bottom: 1px solid transparent; }
 .menu-nav a:hover, .menu-nav a.is-active { border-color: currentColor; color: var(--green); }
 
-.course { padding-block: clamp(34px, 7vh, 84px); scroll-margin-top: 120px; }
+.course { padding-block: clamp(34px, 7vh, 84px); scroll-margin-top: calc(var(--hh) + 58px); }
 .course__head {
   display: flex;
   align-items: baseline;
@@ -1077,10 +1087,7 @@ body.nav-open .nav__item a { transform: translateY(0); opacity: 1; }
   .place__data { gap: clamp(22px, 4vh, 34px); }
 
   /* --- Carta --- */
-  .menu-nav { top: var(--hh); padding-block: 12px; transition: top 0.55s var(--ease); }
-  /* Cuando la cabecera se esconde al bajar, el índice sube con ella:
-     si no, queda una franja de papel con contenido asomando por detrás. */
-  body:has(.header.is-hidden) .menu-nav { top: 0; }
+  .menu-nav { padding-block: 12px; }
   .menu-nav ul {
     padding-inline: var(--gut);
     margin-inline: calc(var(--gut) * -1);
@@ -1088,7 +1095,6 @@ body.nav-open .nav__item a { transform: translateY(0); opacity: 1; }
     gap: 20px;
   }
   .menu-nav a { padding-block: 8px; }
-  .course { scroll-margin-top: calc(var(--hh) + 58px); }
   .dishes { gap: 0; }
   .dish {
     gap: 7px;
