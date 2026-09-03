@@ -137,6 +137,20 @@ costado derecho del logotipo. Si se añade cualquier otro texto dentro de la sec
 va debajo del logotipo — el auto-placement de la rejilla lo mandaría a la celda libre
 de la derecha, que fue lo que descolocó el «desde 2022» de Nosotros.
 
+## Reseñas (home)
+
+Sección estática entre el logotipo gigante y Localización. Nota media a gran escala,
+enlace al perfil de Google y tres reseñas, cada una abierta por sus estrellas (el
+mismo recurso que los números de Nosotros: un elemento grande arriba, sin filetes).
+
+⚠️ **Los textos entre corchetes son marcadores, no reseñas reales.** Hay que pegar
+las de verdad del perfil de Google, tal cual están, sin reescribirlas. Están todas
+juntas en el mismo bloque de `index.html`, marcadas con un comentario.
+
+Si más adelante se quieren en vivo, la vía es la Places API de Google (`Place Details`
+devuelve hasta 5 reseñas) desde una función serverless que cachee la respuesta —
+la clave no puede ir en el cliente y la API se cobra por petición.
+
 ## Manifiesto (home)
 
 Bloque de texto en mayúsculas alineado a la derecha y apoyado en el margen derecho,

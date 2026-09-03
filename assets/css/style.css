@@ -550,6 +550,65 @@ body.nav-open .nav__item a { transform: translateY(0); opacity: 1; }
 .wordmark--left h2 { grid-area: 2 / 1; text-align: left; }
 .wordmark--left .jp { grid-area: 2 / 2; align-self: end; }
 
+/* ---------- Reseñas ---------- */
+.reviews {
+  padding-block: clamp(60px, 12vh, 160px);
+  display: grid;
+  gap: clamp(34px, 7vh, 78px);
+}
+.reviews__head { display: grid; justify-items: start; gap: clamp(8px, 1.6vh, 16px); }
+.reviews__score { margin: 0; display: flex; align-items: baseline; gap: 6px; }
+.reviews__num {
+  font-weight: 400;
+  font-size: clamp(64px, 9.6vw, 168px);
+  line-height: 0.82;
+  letter-spacing: -0.035em;
+}
+.reviews__of { font-size: clamp(18px, 1.9vw, 34px); color: var(--ink-soft); }
+.reviews__meta {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: clamp(12px, 0.95vw, 16px);
+  color: var(--ink-soft);
+}
+.reviews__meta .link-u { font-size: inherit; letter-spacing: 0.06em; }
+
+.reviews__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(26px, 4vw, 72px);
+}
+/* Sin filetes: lo que abre cada reseña son las estrellas, igual que en
+   Nosotros lo que abre cada bloque es el número. */
+.review { display: grid; align-content: start; gap: 12px; }
+.review__stars {
+  margin: 0;
+  color: var(--green);
+  font-size: clamp(16px, 1.4vw, 22px);
+  letter-spacing: 0.16em;
+}
+.review__text {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: clamp(14px, 1.05vw, 17px);
+  line-height: 1.3;
+}
+.review__by {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: clamp(11px, 0.85vw, 14px);
+  color: var(--ink-soft);
+}
+.review__by cite {
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1.2em;
+  color: var(--green-deep);
+}
+
 /* ---------- Localización ---------- */
 .place { padding-block: clamp(60px, 12vh, 160px); }
 .place__grid {
@@ -1067,6 +1126,12 @@ body:has(.header.is-hidden) .menu-nav { transform: translateY(calc(var(--hh) * -
          entera en lugar de dejarse el margen que se movía. --- */
   .bleed { height: 62svh; }
   .bleed img { inset: 0; height: 100%; }
+
+  /* --- Reseñas --- */
+  .reviews { padding-block: clamp(46px, 8vh, 78px); gap: clamp(26px, 5vh, 44px); }
+  .reviews__num { font-size: clamp(64px, 22vw, 110px); }
+  .reviews__list { grid-template-columns: 1fr; gap: 30px; }
+  .review__text { font-size: 15px; }
 
   /* --- Localización --- */
   .place__grid { gap: clamp(28px, 6vh, 52px); }
