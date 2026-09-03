@@ -556,12 +556,15 @@ body.nav-open .nav__item a { transform: translateY(0); opacity: 1; }
   display: grid;
   gap: clamp(34px, 7vh, 78px);
 }
-.reviews__head { display: grid; justify-items: start; gap: clamp(8px, 1.6vh, 16px); }
+.reviews__head { display: grid; justify-items: start; gap: clamp(10px, 2vh, 20px); }
+.reviews__head .story__lead { margin: 0 0 clamp(6px, 1.4vh, 16px); }
 .reviews__score { margin: 0; display: flex; align-items: baseline; gap: 6px; }
 .reviews__num {
   font-weight: 400;
   font-size: clamp(64px, 9.6vw, 168px);
-  line-height: 0.82;
+  /* line-height por debajo de 1 recortaba la caja de línea y el dato de
+     debajo se montaba encima del número. */
+  line-height: 1;
   letter-spacing: -0.035em;
 }
 .reviews__of { font-size: clamp(18px, 1.9vw, 34px); color: var(--ink-soft); }

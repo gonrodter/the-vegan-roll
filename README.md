@@ -143,9 +143,14 @@ Sección estática entre el logotipo gigante y Localización. Nota media a gran 
 enlace al perfil de Google y tres reseñas, cada una abierta por sus estrellas (el
 mismo recurso que los números de Nosotros: un elemento grande arriba, sin filetes).
 
-⚠️ **Los textos entre corchetes son marcadores, no reseñas reales.** Hay que pegar
-las de verdad del perfil de Google, tal cual están, sin reescribirlas. Están todas
-juntas en el mismo bloque de `index.html`, marcadas con un comentario.
+Los datos y las tres citas se tomaron del perfil de Google del restaurante el
+**3 de septiembre de 2026**: 4,9 sobre 1.397 reseñas. Las citas van tal cual las
+escribieron sus autores. Si se actualizan, hay que tocar tres cosas en el mismo
+bloque de `index.html`: la nota, el número de reseñas y los tres textos.
+
+El enlace «verlas todas» usa el CID del negocio
+(`https://maps.google.com/?cid=71564320683409384`), que aterriza directamente en su
+ficha y no depende de que la búsqueda por nombre siga funcionando.
 
 Si más adelante se quieren en vivo, la vía es la Places API de Google (`Place Details`
 devuelve hasta 5 reseñas) desde una función serverless que cachee la respuesta —
