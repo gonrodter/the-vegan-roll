@@ -848,9 +848,8 @@ body:has(.header.is-hidden) .menu-nav { transform: translateY(calc(var(--hh) * -
 }
 [data-anim="mask"] { opacity: 1; transform: none; overflow: hidden; }
 
-/* Fondo de espera en los huecos de foto: mientras la imagen llega se ve un
-   bloque de papel tintado en vez de un vacío del color de la página. */
-[data-anim="mask"], .bleed, .gallery__item, .place__map { background: var(--paper-2); }
+/* Sin fondo de espera: los huecos de foto se quedan del color de la página y
+   la imagen aparece de golpe, sin recuadro gris que parezca un error de carga. */
 [data-anim="mask"] > img {
   clip-path: inset(0 0 100% 0);
   transform: scale(1.06);
