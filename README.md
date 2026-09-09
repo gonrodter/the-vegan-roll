@@ -131,15 +131,12 @@ Afecta a `canonical`, `og:url`, `og:image` y `twitter:image`.
 
 ## Wordmark
 
-`.wordmark` es centrado por defecto (Nosotros, Reserva). La home usa la variante
-`.wordmark--left`: alineada a la izquierda con el vertical japonés apoyado en el
-costado derecho del logotipo. Si se añade cualquier otro texto dentro de la sección,
-va debajo del logotipo — el auto-placement de la rejilla lo mandaría a la celda libre
-de la derecha, que fue lo que descolocó el «desde 2022» de Nosotros.
+`.wordmark` es centrado y se utiliza en Nosotros y Reserva. La home enlaza el
+manifiesto directamente con la sección de reseñas, sin un wordmark intermedio.
 
 ## Reseñas (home)
 
-Sección estática entre el logotipo gigante y Localización. Nota media a gran escala,
+Sección estática entre el manifiesto y Localización. Nota media a gran escala,
 enlace al perfil de Google y tres reseñas, cada una abierta por sus estrellas (el
 mismo recurso que los números de Nosotros: un elemento grande arriba, sin filetes).
 

@@ -537,19 +537,6 @@ body.nav-open .nav__item a { transform: translateY(0); opacity: 1; }
 .wordmark__leaf { width: clamp(70px, 8vw, 118px); opacity: 0.9; }
 .wordmark > p { margin: 0; }
 
-/* Variante de la home: alineada a la izquierda, con el vertical japonés
-   apoyado en el costado derecho del logotipo. */
-.wordmark--left {
-  grid-template-columns: auto auto;
-  justify-content: start;
-  justify-items: start;
-  column-gap: clamp(14px, 2.2vw, 40px);
-  row-gap: clamp(14px, 3vh, 30px);
-}
-.wordmark--left .wordmark__leaf { grid-area: 1 / 1; }
-.wordmark--left h2 { grid-area: 2 / 1; text-align: left; }
-.wordmark--left .jp { grid-area: 2 / 2; align-self: end; }
-
 /* ---------- Reseñas ---------- */
 .reviews {
   padding-block: clamp(60px, 12vh, 160px);
@@ -1177,14 +1164,6 @@ body:has(.header.is-hidden) .menu-nav { transform: translateY(calc(var(--hh) * -
   .dish__desc { font-size: 14px; max-width: none; }
   .dish__dots { display: none; }          /* a este ancho los puntos solo hacen ruido */
   .dish__top { gap: 12px; }
-
-  /* --- Wordmark: en móvil el logotipo se estrecha, así que el vertical
-         japonés se lleva al margen derecho en vez de dejarlo suelto a media
-         columna. --- */
-  .wordmark--left { grid-template-columns: 1fr auto; }
-  /* El vertical japonés ocupa las dos filas (logo + logotipo): así su altura
-     no cuelga por debajo del bloque dejando un hueco muerto. */
-  .wordmark--left .jp { grid-row: 1 / span 2; align-self: start; }
 
   /* --- Nosotros --- */
   .values { gap: 30px; }
