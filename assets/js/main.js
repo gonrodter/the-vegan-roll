@@ -154,6 +154,20 @@
   const galleries = [...document.querySelectorAll('[data-gallery]')];
   const header = document.querySelector('[data-header]');
 
+  /* ---------- Índice de la carta: saber cuándo está realmente pegado ----------
+     El índice sube junto a la cabecera cuando esta se esconde, pero eso solo
+     tiene sentido si ya está pegado arriba. Si no, se levantaba de su sitio y
+     quedaba flotando en mitad de la página. Un ancla de alto cero delante del
+     índice da su posición de flujo (ni el sticky ni el transform la mueven). */
+  const menuNav = document.querySelector('[data-menu-nav]');
+  let menuAnchor = null;
+  if (menuNav) {
+    menuAnchor = document.createElement('div');
+    menuAnchor.className = 'menu-nav__anchor';
+    menuAnchor.setAttribute('aria-hidden', 'true');
+    menuNav.before(menuAnchor);
+  }
+
   /* ---------- Marquees ---------- */
   const marquees = [...document.querySelectorAll('[data-marquee]')].map((track) => {
     // Duplicamos el contenido para que el bucle sea continuo.
@@ -213,6 +227,21 @@
       if (!document.body.classList.contains('nav-open') && Math.abs(delta) > 2) {
         header.classList.toggle('is-hidden', delta > 0 && y > 140);
       }
+    }
+
+    if (menuAnchor) {
+      /* Sin cabecera el índice tiene que pegarse al borde, no a --hh. Esa resta
+         no puede aplicarse de golpe: si el índice aún no ha llegado arriba, da
+         el salto de lo que ocupa la cabecera oculta. Así que el desfase se sigue
+         del ancla y solo llega a --hh cuando el índice ya está pegado; hasta
+         entonces acompaña al scroll y no se despega de su sitio. */
+      const hh = header ? header.offsetHeight : 0;
+      const at = menuAnchor.getBoundingClientRect().top;
+      const hidden = header ? header.classList.contains('is-hidden') : false;
+      const off = hidden ? Math.max(-hh, Math.min(0, at - hh)) : 0;
+      // En ese tramo el desfase lo manda el scroll: animarlo lo dejaría rezagado.
+      menuNav.classList.toggle('is-instant', at > 0 && at < hh);
+      menuNav.style.transform = off ? `translate3d(0, ${off.toFixed(1)}px, 0)` : '';
     }
 
     /* Hero: la foto arranca pequeña y crece con el scroll. También en móvil. */

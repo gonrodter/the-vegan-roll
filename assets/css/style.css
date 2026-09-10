@@ -668,9 +668,11 @@ body.nav-open .nav__item a { transform: translateY(0); opacity: 1; }
   white-space: nowrap;
 }
 .menu-nav ul::-webkit-scrollbar { display: none; }
-/* Cuando la cabecera se esconde al bajar, el índice sube con ella: si no,
-   queda una franja de papel con contenido asomando por detrás. */
-body:has(.header.is-hidden) .menu-nav { transform: translateY(calc(var(--hh) * -1)); }
+/* Ancla de alto cero: marca la posición de flujo del índice, que ni el sticky
+   ni el transform mueven. El JS la usa para calcular el desfase cuando la
+   cabecera se esconde y el índice tiene que pegarse al borde superior. */
+.menu-nav__anchor { height: 0; }
+.menu-nav.is-instant { transition: none; }
 .menu-nav a { padding-block: 4px; border-bottom: 1px solid transparent; }
 .menu-nav a:hover, .menu-nav a.is-active { border-color: currentColor; color: var(--green); }
 
